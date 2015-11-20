@@ -6,5 +6,6 @@ CREATE TABLE users (
   last_name  VARCHAR(50) NOT NULL,
   email      VARCHAR(80) NOT NULL,
   PRIMARY KEY (id),
+  UNIQUE INDEX (username),
   UNIQUE INDEX (email)
 );
