@@ -1,22 +1,22 @@
 <?php
-require_once(dirname(__FILE__) . '/bets/vendor/Slim/Slim.php');
+
+require_once dirname(__FILE__) . '/vendor/Slim/Slim.php';
+require_once dirname(__FILE__) . '/bets/Bets.php';
 
 \Slim\Slim::registerAutoloader();
+\bets\Bets::registerAutoloader();
+
 $app = new \Slim\Slim();
 $app->environment['PATH_INFO'] = $_SERVER['REQUEST_URI'];
+$app->contentType('application/json');
 
 $app->get('/', function () use ($app) {
     $app->contentType('text/html; charset=utf-8');
 });
 
-$app->get('/bets/api/version', function () use ($app) {
-    $app->contentType('application/json');
-    $info = array (
-        "app-name"  => 'bets',
-        "app-version" => '0.1.0',
-        "app-url"   => 'https://github.com/grigoriev/bets'
-    );
-    echo json_encode($info);
-});
+include_once dirname(__FILE__) . '/api/user.php';
+
+include_once dirname(__FILE__) . '/api/version.php';
+include_once dirname(__FILE__) . '/api/test.php';
 
 $app->run();
