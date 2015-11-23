@@ -2,6 +2,8 @@
 
 namespace bets\dao;
 
+use bets\model\User;
+
 class UserManager extends AbstractManager
 {
     function create()
@@ -10,7 +12,7 @@ class UserManager extends AbstractManager
 
     function findById($id)
     {
-        $user = new \bets\model\User();
+        $user = new User();
         $user->id = $id;
         $user->username = 'grigoriev';
         $user->password = md5('123');
@@ -20,9 +22,13 @@ class UserManager extends AbstractManager
         return $user;
     }
 
+    public function findAll()
+    {
+    }
+
     function findByName($username)
     {
-        $user = new \bets\model\User();
+        $user = new User();
         $user->id = 1;
         $user->username = $username;
         $user->password = md5('123');
@@ -34,7 +40,7 @@ class UserManager extends AbstractManager
 
     function authenticate($username, $password)
     {
-        $user = new \bets\model\User();
+        $user = new User();
         $user->id = 1;
         $user->username = $username;
         $user->password = md5($password);
@@ -44,11 +50,11 @@ class UserManager extends AbstractManager
         return $user;
     }
 
-    function update()
+    function update($entity)
     {
     }
 
-    function delete()
+    function delete($entity)
     {
     }
 }

@@ -2,18 +2,21 @@
 
 namespace bets\dao;
 
-abstract class AbstractManager
+abstract class AbstractManager implements Manager
 {
     protected static $instances = array();
 
-    private function __construct()
+    final private function __construct()
     {
     }
 
-    private function __clone()
+    final private function __clone()
     {
     }
 
+    /**
+     * @return UserManager|
+     */
     final public static function instance()
     {
         $calledClass = get_called_class();

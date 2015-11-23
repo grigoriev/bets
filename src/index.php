@@ -12,6 +12,7 @@ $app->contentType('application/json');
 
 $app->get('/', function () use ($app) {
     $app->contentType('text/html; charset=utf-8');
+    phpinfo();
 });
 
 include_once dirname(__FILE__) . '/api/user.php';
