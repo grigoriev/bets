@@ -12,7 +12,12 @@ $app->contentType('application/json');
 
 $app->get('/', function () use ($app) {
     $app->contentType('text/html; charset=utf-8');
-    phpinfo();
+    echo file_get_contents(dirname(__FILE__) . '/gui/main/main.html');
+});
+
+$app->get('/login', function () use ($app) {
+    $app->contentType('text/html; charset=utf-8');
+    echo file_get_contents(dirname(__FILE__) . '/gui/login/login.html');
 });
 
 include_once dirname(__FILE__) . '/api/user.php';
