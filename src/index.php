@@ -10,7 +10,33 @@ $app = new \Slim\Slim();
 $app->environment['PATH_INFO'] = $_SERVER['REQUEST_URI'];
 $app->contentType('application/json');
 
-$app->get('/', function () use ($app) {
+
+function isValidApiKey($api_key)
+{
+    return false;
+}
+
+function authenticate(\Slim\Route $route)
+{
+    $headers = apache_request_headers();
+    $app = \Slim\Slim::getInstance();
+
+    if (isset($headers['Authorization'])) {
+        $api_key = $headers['Authorization'];
+    } else {
+        $app->redirect('/login');
+    }
+}
+
+function response($status_code, $response)
+{
+    $app = \Slim\Slim::getInstance();
+    $app->status($status_code);
+    $app->contentType('application/json');
+    echo json_encode($response);
+}
+
+$app->get('/', 'authenticate', function () use ($app) {
     $app->contentType('text/html; charset=utf-8');
     echo file_get_contents(dirname(__FILE__) . '/gui/main/main.html');
 });
