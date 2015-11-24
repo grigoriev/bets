@@ -4,7 +4,7 @@ namespace bets\dao;
 
 interface Manager
 {
-    public function create();
+    public function create($entity);
 
     public function findById($id);
 

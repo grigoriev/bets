@@ -1,0 +1,10 @@
+<?php
+
+namespace bets\db;
+
+class Config
+{
+    public static $dsn = 'mysql:host=localhost;dbname=bets;charset=utf8';
+    public static $user = 'bets';
+    public static $pass = 'password';
+}
