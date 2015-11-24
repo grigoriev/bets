@@ -2,20 +2,21 @@
 
 namespace bets\db;
 
+use bets\config\Config;
 use bets\exceptions\EntityNotFoundException;
 use bets\exceptions\ResultIsNotUniqueException;
 use PDO;
 
 class DatabaseManager
 {
-    private static $opt = array(
+    private static $options = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     );
 
     public static function connect()
     {
-        return new PDO(Config::$dsn, Config::$user, Config::$pass, self::$opt);
+        return new PDO(Config::$dsn, Config::$user, Config::$pass, self::$options);
     }
 
     public static function disconnect($pdo)

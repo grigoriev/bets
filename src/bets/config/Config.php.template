@@ -1,6 +1,6 @@
 <?php
 
-namespace bets\db;
+namespace bets\config;
 
 class Config
 {
