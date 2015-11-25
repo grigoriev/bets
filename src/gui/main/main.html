@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <title>Bets :: Main</title>
 
-    <link rel="stylesheet" type="text/css" href="../common/css/common.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/gui/common/css/common.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/gui/main/css/main.css" media="screen"/>
 
-    <script type="application/javascript" src="../common/js/common.js"></script>
-    <script type="application/javascript" src="js/main.js"></script>
+    <script type="application/javascript" src="/gui/common/js/jquery/jquery.min.js"></script>
+    <script type="application/javascript" src="/gui/common/js/jquery/jquery.cookie.js"></script>
+    <script type="application/javascript" src="/gui/common/js/common.js"></script>
+    <script type="application/javascript" src="/gui/main/js/main.js"></script>
 </head>
 <body>
-    Main
+
+<div class="logout-form">
+    <input type="button" name="login" value="Logout" onclick="doLogout();">
+</div>
+
 </body>
 </html>
