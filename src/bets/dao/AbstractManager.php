@@ -15,7 +15,7 @@ abstract class AbstractManager implements Manager
     }
 
     /**
-     * @return UserManager|
+     * @return UserManager|UserSessionManager
      */
     final public static function instance()
     {

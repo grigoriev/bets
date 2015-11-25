@@ -1,5 +1,7 @@
 <?php
 
+use bets\dao\UserSessionManager;
+
 require_once dirname(__FILE__) . '/vendor/Slim/Slim.php';
 require_once dirname(__FILE__) . '/bets/Bets.php';
 
