@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="/gui/common/css/common.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/gui/main/css/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/gui/main/css/menu.css" media="screen"/>
 
     <script type="application/javascript" src="/gui/common/js/jquery/jquery.min.js"></script>
     <script type="application/javascript" src="/gui/common/js/jquery/jquery.cookie.js"></script>
@@ -15,13 +16,41 @@
 <body>
 
 <header>
-    <input type="button" name="login" value="Logout" onclick="doLogout();">
 </header>
 <main>
-    <aside></aside>
+    <aside>
+        <img src="/gui/img/avatar.png" alt="" class="circular"/>
+
+        <div id='cssmenu'>
+            <ul>
+                <li><a onclick=""><span>Dashboard</span></a></li>
+                <li class='active has-sub'><a href='#'><span>Products</span></a>
+                    <ul>
+                        <li class='has-sub'><a href='#'><span>Product 1</span></a>
+                            <ul>
+                                <li><a href='#'><span>Sub Product</span></a></li>
+                                <li class='last'><a href='#'><span>Sub Product</span></a></li>
+                            </ul>
+                        </li>
+                        <li class='has-sub'><a href='#'><span>Product 2</span></a>
+                            <ul>
+                                <li><a href='#'><span>Sub Product</span></a></li>
+                                <li class='last'><a href='#'><span>Sub Product</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href='#'><span>About</span></a></li>
+                <li><a href='#'><span>Profile</span></a></li>
+                <li class='last'><a onclick="doLogout()"><span>Logout</span></a></li>
+            </ul>
+        </div>
+    </aside>
     <section></section>
 </main>
-<footer></footer>
+<footer>
+
+</footer>
 
 </body>
 </html>

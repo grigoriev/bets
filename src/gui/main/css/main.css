@@ -7,9 +7,10 @@ html, body {
 header, footer, main, aside, section {
     position: absolute;
     width: 100%;
-    box-sizing: border-box;
+}
+
+header, footer, aside {
     background: lightgrey;
-    border: 1px solid;
 }
 
 header, footer, menu, section {
@@ -17,8 +18,12 @@ header, footer, menu, section {
     width: 100%;
 }
 
-header, footer {
+header {
     height: 50px;
+}
+
+footer {
+    height: 15px;
 }
 
 footer {
@@ -27,7 +32,7 @@ footer {
 
 main {
     top: 50px;
-    bottom: 50px;
+    bottom: 15px;
 }
 
 aside, section {
@@ -36,15 +41,24 @@ aside, section {
 }
 
 aside {
-    width: 200px;
+    width: 180px;
 }
 
 section {
     right: 0;
-    left: 200px;
+    left: 180px;
     width: auto;
 }
 
 section {
     overflow-y: scroll;
+}
+
+.circular {
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    border-radius: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
