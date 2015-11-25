@@ -27,4 +27,5 @@ $(document).ready(function () {
             element.siblings('li').find('ul').slideUp();
         }
     });
+    $('#cssmenu').find('li.has-sub>a').click();
 });
