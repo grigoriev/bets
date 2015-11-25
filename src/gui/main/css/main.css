@@ -1,0 +1,50 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+header, footer, main, aside, section {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    background: lightgrey;
+    border: 1px solid;
+}
+
+header, footer, menu, section {
+    position: absolute;
+    width: 100%;
+}
+
+header, footer {
+    height: 50px;
+}
+
+footer {
+    bottom: 0;
+}
+
+main {
+    top: 50px;
+    bottom: 50px;
+}
+
+aside, section {
+    top: 0;
+    bottom: 0;
+}
+
+aside {
+    width: 100px;
+}
+
+section {
+    right: 0;
+    left: 100px;
+    width: auto;
+}
+
+section {
+    overflow-y: scroll;
+}
