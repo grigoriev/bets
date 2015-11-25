@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <title>Bets :: Login</title>
 
-    <link rel="stylesheet" type="text/css" href="../common/css/common.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/login.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/gui/common/css/common.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/gui/login/css/login.css" media="screen"/>
 
-    <script type="application/javascript" src="../common/js/common.js"></script>
-    <script type="application/javascript" src="js/login.js"></script>
+    <script type="application/javascript" src="/gui/common/js/jquery/jquery.min.js"></script>
+    <script type="application/javascript" src="/gui/common/js/jquery/jquery.cookie.js"></script>
+    <script type="application/javascript" src="/gui/common/js/common.js"></script>
+    <script type="application/javascript" src="/gui/login/js/login.js"></script>
 </head>
 <body>
-    Login
+
+<div class="login">
+    <h1>Login to Bets</h1>
+    <input type="text" name="username" value="" placeholder="username">
+    <input type="password" name="password" value="" placeholder="password">
+    <input type="button" name="login" value="Login" onclick="doLogin();">
+</div>
+
 </body>
 </html>

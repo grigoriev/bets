@@ -74,15 +74,19 @@ class UserSessionManager extends AbstractManager
         return $result;
     }
 
-    private function findByUsernameAndIpAddress($username, $ip_address)
+    public function findByUsernameAndIpAddress($username, $ip_address)
     {
         $parameters = array(
             new QueryParam(':username', $username, PDO::PARAM_STR),
             new QueryParam(':ip_address', $ip_address, PDO::PARAM_STR),
         );
 
-        $selected = DatabaseManager::selectAsObject('SELECT * FROM user_sessions WHERE username = :username and ip_address = :ip_address', $parameters);
-        return new UserSession($selected);
+        try {
+            $selected = DatabaseManager::selectAsObject('SELECT * FROM user_sessions WHERE username = :username AND ip_address = :ip_address', $parameters);
+            return new UserSession($selected);
+        } catch (EntityNotFoundException $e) {
+            return new UserSession();
+        }
     }
 
     function update($entity)

@@ -3,7 +3,7 @@
 use bets\dao\UserSessionManager;
 use bets\model\UserSession;
 
-$app->get('/bets/api/user/session/new/:username', function ($username) use ($app) {
+$app->post('/bets/api/user/session/new/:username', function ($username) use ($app) {
     $user_session = new UserSession();
     $user_session->username = $username;
     $user_session->ip_address = $app->request->getIp();

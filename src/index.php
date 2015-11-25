@@ -1,6 +1,7 @@
 <?php
 
 use bets\Bets;
+use bets\dao\UserSessionManager;
 use Slim\Route;
 use Slim\Slim;
 
@@ -22,11 +23,17 @@ function isValidApiKey($api_key)
 
 function authenticate(Route $route)
 {
-    $headers = apache_request_headers();
     $app = Slim::getInstance();
 
-    if (isset($headers['Authorization'])) {
-        $api_key = $headers['Authorization'];
+    if (isset($_COOKIE['session-uuid']) && isset($_COOKIE['session-username']) && isset($_COOKIE['session-ip-address'])) {
+        $uuid = $_COOKIE['session-uuid'];
+        $username = $_COOKIE['session-username'];
+        $ip_address = $_COOKIE['session-ip-address'];
+
+        $userSession = UserSessionManager::instance()->findByUsernameAndIpAddress($username, $ip_address);
+        if ($userSession->uuid !== $uuid) {
+            $app->redirect('/login');
+        }
     } else {
         $app->redirect('/login');
     }
