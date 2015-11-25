@@ -1,14 +1,16 @@
 <?php
 
-use bets\dao\UserSessionManager;
+use bets\Bets;
+use Slim\Route;
+use Slim\Slim;
 
 require_once dirname(__FILE__) . '/vendor/Slim/Slim.php';
 require_once dirname(__FILE__) . '/bets/Bets.php';
 
-\Slim\Slim::registerAutoloader();
-\bets\Bets::registerAutoloader();
+Slim::registerAutoloader();
+Bets::registerAutoloader();
 
-$app = new \Slim\Slim();
+$app = new Slim();
 $app->environment['PATH_INFO'] = $_SERVER['REQUEST_URI'];
 $app->contentType('application/json');
 
@@ -18,10 +20,10 @@ function isValidApiKey($api_key)
     return false;
 }
 
-function authenticate(\Slim\Route $route)
+function authenticate(Route $route)
 {
     $headers = apache_request_headers();
-    $app = \Slim\Slim::getInstance();
+    $app = Slim::getInstance();
 
     if (isset($headers['Authorization'])) {
         $api_key = $headers['Authorization'];
@@ -32,7 +34,7 @@ function authenticate(\Slim\Route $route)
 
 function response($status_code, $response)
 {
-    $app = \Slim\Slim::getInstance();
+    $app = Slim::getInstance();
     $app->status($status_code);
     $app->contentType('application/json');
     echo json_encode($response);
@@ -49,6 +51,7 @@ $app->get('/login', function () use ($app) {
 });
 
 include_once dirname(__FILE__) . '/api/user.php';
+include_once dirname(__FILE__) . '/api/user_session.php';
 
 include_once dirname(__FILE__) . '/api/version.php';
 include_once dirname(__FILE__) . '/api/test.php';

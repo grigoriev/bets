@@ -6,7 +6,9 @@ use bets\db\DatabaseManager;
 use bets\db\QueryParam;
 use bets\exceptions;
 use bets\exceptions\EntityNotFoundException;
+use bets\model\Error;
 use bets\model\User;
+use Exception;
 use PDO;
 
 
@@ -22,18 +24,28 @@ class UserManager extends AbstractManager
             new QueryParam(':email', $entity->email, PDO::PARAM_STR),
         );
 
-        $entity->id = DatabaseManager::create('INSERT INTO users (username, password, first_name, last_name, email) VALUES (:username, :password, :first_name, :last_name, :email)', $parameters);
-        return $entity;
+        try {
+            DatabaseManager::create('INSERT INTO users (username, password, first_name, last_name, email) VALUES (:username, :password, :first_name, :last_name, :email)', $parameters);
+            return $entity;
+        } catch (Exception $e) {
+            return new Error($e);
+        }
     }
 
-    function findById($id)
+    function findById($username)
     {
         $parameters = array(
-            new QueryParam(':id', $id, PDO::PARAM_INT),
+            new QueryParam(':username', $username, PDO::PARAM_STR),
         );
 
-        $selected = DatabaseManager::selectAsObject('SELECT * FROM users WHERE id = :id', $parameters);
-        return new User($selected);
+        try {
+            $selected = DatabaseManager::selectAsObject('SELECT * FROM users WHERE username = :username', $parameters);
+            return new User($selected);
+        } catch (EntityNotFoundException $e) {
+            return new User();
+        } catch (Exception $e) {
+            return new Error($e);
+        }
     }
 
     public function findAll()
@@ -47,16 +59,6 @@ class UserManager extends AbstractManager
         return $result;
     }
 
-    function findByName($username)
-    {
-        $parameters = array(
-            new QueryParam(':username', $username, PDO::PARAM_STR),
-        );
-
-        $selected = DatabaseManager::selectAsObject('SELECT * FROM users WHERE username = :username', $parameters);
-        return new User($selected);
-    }
-
     function authenticate($username, $password)
     {
         $parameters = array(
@@ -66,16 +68,15 @@ class UserManager extends AbstractManager
 
         try {
             DatabaseManager::selectAsObject('SELECT * FROM users WHERE username = :username AND password = :password', $parameters);
+            return true;
         } catch (EntityNotFoundException $e) {
             return false;
         }
-        return true;
     }
 
     function update($entity)
     {
         $parameters = array(
-            new QueryParam(':id', $entity->id, PDO::PARAM_INT),
             new QueryParam(':username', $entity->username, PDO::PARAM_STR),
             new QueryParam(':password', $entity->password, PDO::PARAM_STR),
             new QueryParam(':first_name', $entity->first_name, PDO::PARAM_STR),
@@ -83,17 +84,17 @@ class UserManager extends AbstractManager
             new QueryParam(':email', $entity->email, PDO::PARAM_STR),
         );
 
-        DatabaseManager::update('UPDATE users SET username = :username, password = :password, first_name = :first_name, last_name = :last_name, email = :email WHERE id = :id', $parameters);
+        DatabaseManager::update('UPDATE users SET password = :password, first_name = :first_name, last_name = :last_name, email = :email WHERE username = :username', $parameters);
         return $entity;
     }
 
     function delete($entity)
     {
         $parameters = array(
-            new QueryParam(':id', $entity->id, PDO::PARAM_INT),
+            new QueryParam(':username', $entity->username, PDO::PARAM_INT),
         );
 
-        DatabaseManager::delete('delete from users WHERE id = :id', $parameters);
+        DatabaseManager::delete('DELETE FROM users WHERE username = :username', $parameters);
         $entity = null;
     }
 }

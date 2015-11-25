@@ -4,7 +4,6 @@ namespace bets\model;
 
 class User extends AbstractObject
 {
-    public $id;
     public $username;
     public $password;
     public $first_name;
@@ -14,7 +13,6 @@ class User extends AbstractObject
     public function __construct($array = null)
     {
         if ($array !== null) {
-            $this->id = $array['id'];
             $this->username = $array['username'];
             $this->password = $array['password'];
             $this->first_name = $array['first_name'];
